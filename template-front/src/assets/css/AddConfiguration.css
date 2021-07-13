@@ -1,0 +1,41 @@
+.text-area{
+    width: 96% !important;
+    margin: 0 0 15px 0 !important;
+    resize: none;
+}
+
+.full-width{
+    width:100%;
+}
+
+.input-list{
+    margin: 35px auto;
+}
+
+.input-list-input{
+    height: 20px !important;
+    margin: 10px 0px;
+}
+
+.template-input-list{
+    height: 20px !important;
+    margin: 0px 10px 0 0  !important;
+}
+
+
+
+.add-template-form{
+    padding: 20px;
+}
+
+.margin-top{
+    margin-top: 10px;
+}
+
+
+.add-label-delimiter{
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 170px;
+}
