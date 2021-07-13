@@ -1,5 +1,5 @@
 package com.template.demo.conf;
-//
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -25,40 +25,40 @@ import java.util.Map;
 )
 public class DataSourceConfiguration {
 
-//    @Value("${spring.datasource.username}")
-//    private String username;
-//
-//    @Value("${spring.datasource.password}")
-//    private String password;
-//
-//    @Value("${spring.datasource.driver-class-name}")
-//    private String driverClassName;
-//
-//    @Value("${spring.datasource.url}")
-//    private String url;
-//
-//    @Bean(name = "templateDataSource")
-//    public DataSource dataSource() {
-//        return DataSourceBuilder.create().driverClassName(Driver.class.getName())
-//                .username("tato")
-//                .password("Qwerty123$")
-//                .driverClassName(driverClassName)
-//                .url(url)
-//                .build();
-//    }
-//
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+
+    @Value("${spring.datasource.url}")
+    private String url;
+
+    @Bean(name = "templateDataSource")
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().driverClassName(Driver.class.getName())
+                .username(username)
+                .password(password)
+                .driverClassName(driverClassName)
+                .url(url)
+                .build();
+    }
+
     @Bean(name = "templateEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean filterEntityManagerFactory(EntityManagerFactoryBuilder builder, DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean filterEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("templateDataSource") DataSource dataSource) {
         Map<String, Object> prop = new HashMap<>();
         prop.put("hikari.maximum-pool-size", 2);
         prop.put("hikari.minimum", 1);
-//        prop.put("spring.jpa.database-platform", "org.hibernate.dialect.PostgreSQL12Dialect");
-//        prop.put("spring.jpa.properties.hibernate.dialect", "org.hibernate.dialect.MySQL12Dialect");
-//        prop.put("spring.datasource.platform", "postgres");
-        prop.put("hibernate.hbm2ddl.auto", "create-drop");
-//        prop.put("hibernate.id.new_generator_mappings",true);
-        prop.put("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");
-//        prop.put("spring.jpa.hibernate.naming.implicit-strategy","org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl");
+        prop.put("spring.jpa.database-platform", "org.hibernate.dialect.PostgreSQL12Dialect");
+        prop.put("spring.jpa.properties.hibernate.dialect", "org.hibernate.dialect.MySQL12Dialect");
+        prop.put("spring.datasource.platform", "postgres");
+        prop.put("hibernate.hbm2ddl.auto", "update");
+        prop.put("hibernate.id.new_generator_mappings",true);
+        prop.put("dialect","org.hibernate.dialect.PostgreSQLDialect");
+        prop.put("spring.jpa.hibernate.naming.implicit-strategy","org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl");
         prop.put("hikari.idle-timeout", 10000);
         prop.put("hikari.max-lifetime", 30000);
 
