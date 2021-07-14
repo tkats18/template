@@ -6,11 +6,14 @@ import axios from 'axios';
 import AddConfigurationModal from "./AddConfigurationModal"
 import CompileModal from "./CompileModal"
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 
 const Configurations =({currentTab,tabIndex})=>{
 
     const hist = useHistory()
+
+    const dispatcher = useDispatch()
 
     const [data,setData] = useState([])
     const [addTemplateData,setAddTemplateData] = useState({isOpen:false,list:[]})
@@ -56,6 +59,7 @@ const Configurations =({currentTab,tabIndex})=>{
         }).catch(error=>{
             if (error.response && error.response.status===403){
                 hist.push("/login")
+                dispatcher({type:"LOGOUT",payload:null})
             }
         })
     }
